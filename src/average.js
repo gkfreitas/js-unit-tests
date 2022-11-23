@@ -9,10 +9,23 @@
     - average([2, 2]) // Retorno: 2;
     - average([1, 1]) // Retorno: 1;
     - average([1, '2']) // Retorno: undefined;
-*/
-
-const average = () => {
-  
+*/ 
+const average = (array) => {
+  const arrayLength = array.length;
+  let countArray = 0;
+  let arrayAvarage;
+  // Retorna média dos valores do array.
+  for (let i = 0; i < arrayLength; i += 1) {
+    countArray = array[i] + countArray;
+    if (typeof (array[i]) === 'string') {
+      arrayAvarage = NaN;
+    }
+  }
+  arrayAvarage = countArray / arrayLength;
+  // Retorna undefined se o array não for um numero;
+  return Math.round(arrayAvarage);
 };
+
+console.log(average([1, 2, 3, '4', 5]));
 
 module.exports = average;

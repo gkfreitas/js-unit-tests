@@ -13,19 +13,23 @@
 const average = (array) => {
   const arrayLength = array.length;
   let countArray = 0;
-  let arrayAvarage;
-  // Retorna média dos valores do array.
   for (let i = 0; i < arrayLength; i += 1) {
-    countArray = array[i] + countArray;
+    // Retorna undefined se o array não for um numero;
     if (typeof (array[i]) === 'string') {
-      arrayAvarage = NaN;
+      return undefined;
     }
+    // Calcula a soma dos valores do array.
+    countArray = array[i] + countArray;
   }
-  arrayAvarage = countArray / arrayLength;
-  // Retorna undefined se o array não for um numero;
-  return Math.round(arrayAvarage);
+  // Calcula a média dos valores do array
+  const arrayAvarage = countArray / arrayLength;
+  // Retorna undefined se não tiver numeros no array.
+  if (Number.isNaN(arrayAvarage)) {
+    return undefined;
+  }
+    return Math.round(arrayAvarage);
 };
 
-console.log(average([1, 2, 3, '4', 5]));
+console.log(average([]));
 
 module.exports = average;

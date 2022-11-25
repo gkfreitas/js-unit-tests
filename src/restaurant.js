@@ -38,11 +38,36 @@
 
 // Faça os ítens de 1 a 3 no arquivo tests/restaurant.spec.js
 
-// 4: Crie uma função `createMenu()` que, recebendo um objeto como parâmetro, retorna esse objeto no seguinte formato: 
+// 4: Crie uma função `createMenu()` que, recebendo um objeto como parâmetro, retorna esse objeto no seguinte formato:
 //  { fetchMenu: () => objetoPassadoPorParametro }.
 
-const createMenu = () => {};
-
+const menuRestaurante = {
+  food: { coxinha: 3.90, sanduiche: 9.90 },
+  drinks: { agua: 3.90, cerveja: 6.90 },
+};
+const createMenu = (ObjectOrder) => {
+  const meuRestaurant = {
+    fetchMenu() {
+      return ObjectOrder;
+    },
+    consumption: [],
+    order(food) {
+      const objectValues = Object.values(ObjectOrder);
+      const objectValuesLength = Object.values(ObjectOrder).length;
+      
+      for (let i = 0; i < objectValuesLength; i += 1) {
+       if (Object.keys(objectValues[i]).includes(food)) {
+        this.consumption.push(food);
+        console.log(this.consumption);
+       } else {
+        return 'Item indisponínvel';
+       }
+      }
+      },
+    };
+  return meuRestaurant;
+};
+console.log(createMenu(menuRestaurante).order('coxinha'));
 // Faça o item 5 no arquivo tests/restaurant.spec.js
 
 // 6: Adicione ao objeto retornado por `createMenu()` uma chave de nome `consumption` que, como valor inicial, tem um array vazio.

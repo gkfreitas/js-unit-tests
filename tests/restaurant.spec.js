@@ -36,26 +36,28 @@ const createMenu = require('../src/restaurant');
 
 describe('10 - Implemente a função `createMenu`, bem como seus casos de teste', () => {
   it('Verifica se a função `createMenu` tem o comportamento esperado', () => {
-    fail('Teste vazio!');
+    const menuRestaurante = {
+      food: { coxinha: 3.90, sanduiche: 9.90 },
+      drinks: { agua: 3.90, cerveja: 6.90 },
+    };
     // 1: Verifique se função `createMenu()` retorna um objeto que possui a chave `fetchMenu`, a qual tem como valor uma função.
-
+    expect(Object.keys(createMenu())).toContain('fetchMenu');
     // 2: Verifique se 'objetoRetornado.fetchMenu()' retorna um objeto cujas chaves são somente `food` e `drink`, 
     // considerando que a função createMenu() foi chamada com o objeto: `{ food: {}, drink: {} }`.
-
+    expect(Object.keys(createMenu(menuRestaurante).fetchMenu())).toEqual(['food', 'drinks']);
     // 3: Verifique se o menu passado pra função createMenu() é idêntico ao menu recuperado pela função 'objetoRetornado.fetchMenu()'.
-
+    expect(menuRestaurante).toEqual(createMenu(menuRestaurante).fetchMenu());
     // 4: Faça a implementação do item 4 do README no arquivo src/restaurant.js.
 
     // 5: Verifique se 'objetoRetornado.consumption', após a criação do menu, retorna um array vazio.
-
+    expect(createMenu(menuRestaurante).consumption).toEqual([]);
     // 6: Faça a implementação do item 6 do README no arquivo src/restaurant.js.
-    
     // 7: Verifique se, ao chamar uma função associada à chave `order` no objeto retornado, passando uma string como parâmetro
     // - se a string existir nas chaves 'food' ou 'drink', deve ser adicionada ao array consumption
     // - senão, deve exibir a mensagem "Item indisponível" e não adicionar nada ao array
     // Ex: obj.order('coxinha') --> ['coxinha']
     // Ex: obj.order('picanha') --> Exibe "Item indisponível"
-
+    expect(createMenu(menuRestaurante).order('picanha')).toEqual('Item indisponível')
     // 8: Faça a implementação do item 8 do README no arquivo src/restaurant.js.
 
     // 9: Verifique se, ao adicionar três pedidos em sequência, dentre bebidas e comidas, o array `objetoRetornado.consumption` contém os itens pedidos.

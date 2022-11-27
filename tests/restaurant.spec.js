@@ -48,7 +48,6 @@ describe('10 - Implemente a função `createMenu`, bem como seus casos de teste'
     // 3: Verifique se o menu passado pra função createMenu() é idêntico ao menu recuperado pela função 'objetoRetornado.fetchMenu()'.
     expect(menuRestaurante).toEqual(createMenu(menuRestaurante).fetchMenu());
     // 4: Faça a implementação do item 4 do README no arquivo src/restaurant.js.
-
     // 5: Verifique se 'objetoRetornado.consumption', após a criação do menu, retorna um array vazio.
     expect(createMenu(menuRestaurante).consumption).toEqual([]);
     // 6: Faça a implementação do item 6 do README no arquivo src/restaurant.js.
@@ -57,15 +56,18 @@ describe('10 - Implemente a função `createMenu`, bem como seus casos de teste'
     // - senão, deve exibir a mensagem "Item indisponível" e não adicionar nada ao array
     // Ex: obj.order('coxinha') --> ['coxinha']
     // Ex: obj.order('picanha') --> Exibe "Item indisponível"
-    expect(createMenu(menuRestaurante).order('picanha')).toEqual('Item indisponível')
+    expect(createMenu(menuRestaurante).order('picanha')).toEqual('Item indisponível');
+    expect(createMenu(menuRestaurante).order('coxinha')).toEqual(['coxinha']);
     // 8: Faça a implementação do item 8 do README no arquivo src/restaurant.js.
-
     // 9: Verifique se, ao adicionar três pedidos em sequência, dentre bebidas e comidas, o array `objetoRetornado.consumption` contém os itens pedidos.
-
+    createMenu
+    expect(createMenu(menuRestaurante).order('agua')).toEqual(['coxinha', 'agua']);
+    expect(createMenu(menuRestaurante).order('cerveja')).toEqual(['coxinha', 'agua', 'cerveja']);
     // 10: Verifique se a função `order` aceita que pedidos repetidos sejam acrescidos a `consumption`.
-
+    expect(createMenu(menuRestaurante).order('cerveja')).toEqual(['coxinha', 'agua', 'cerveja','cerveja']);
     // 11: Verifique se, ao chamar `objetoRetornado.pay()`, retorna-se a soma dos preços de tudo que foi pedido, acrescido de 10%, conforme registrado em `objetoRetornado.consumption`.
-
+    // Preço de 1 agua, 1 coxinha e 2 cervejas + 10%.
+    expect(createMenu(menuRestaurante).pay()).toBe(23.760000000000005);
     // 12: Faça a implementação do item 12 do README no arquivo src/restaurant.js.
 
   });

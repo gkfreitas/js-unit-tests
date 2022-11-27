@@ -45,29 +45,56 @@ const menuRestaurante = {
   food: { coxinha: 3.90, sanduiche: 9.90 },
   drinks: { agua: 3.90, cerveja: 6.90 },
 };
+
+let consumptionList = [];
 const createMenu = (ObjectOrder) => {
   const meuRestaurant = {
     fetchMenu() {
       return ObjectOrder;
     },
-    consumption: [],
+
+    consumption: consumptionList,
+
     order(food) {
+      // Armazena no arrayFoods os itens do menu.
       const objectValues = Object.values(ObjectOrder);
       const objectValuesLength = Object.values(ObjectOrder).length;
-      
+      let arrayFoods = [];
       for (let i = 0; i < objectValuesLength; i += 1) {
-       if (Object.keys(objectValues[i]).includes(food)) {
-        this.consumption.push(food);
-        console.log(this.consumption);
-       } else {
-        return 'Item indisponínvel';
-       }
+        arrayFoods = arrayFoods.concat(Object.keys(objectValues[i]));
       }
+      // Se o food estiver no array, adiciona no consumption.
+      if (arrayFoods.includes(food)) {
+        this.consumption.push(food);
+        return this.consumption;
+      } 
+      if (arrayFoods.includes(food) !== food) {
+        return 'Item indisponível';
+      }
+      consumptionList.push(food);
+      },
+
+      pay() {
+        const objectValues = Object.values(ObjectOrder);
+        const objectValuesLength = Object.values(ObjectOrder).length;
+        let arrayFoodsPay = [];
+        let arrayFoods = [];
+        let countPay = 0;
+        for (let i = 0; i < objectValuesLength; i += 1) {
+          arrayFoodsPay = arrayFoodsPay.concat(Object.values(objectValues[i]));
+          arrayFoods = arrayFoods.concat(Object.keys(objectValues[i]));
+        }
+        for (let i = 0; i < consumptionList.length; i += 1) {
+          const indexOfFoods = arrayFoods.indexOf(consumptionList[i]);
+          const indexFoodsValues = arrayFoodsPay[indexOfFoods];
+          countPay += indexFoodsValues;
+        }
+        return countPay * 1.1;
       },
     };
   return meuRestaurant;
 };
-console.log(createMenu(menuRestaurante).order('coxinha'));
+
 // Faça o item 5 no arquivo tests/restaurant.spec.js
 
 // 6: Adicione ao objeto retornado por `createMenu()` uma chave de nome `consumption` que, como valor inicial, tem um array vazio.
